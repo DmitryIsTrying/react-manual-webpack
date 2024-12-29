@@ -11,7 +11,12 @@ function parseKeysFromCode(code: string): Set<string> {
     const regex = /t\(['"]([^'"]+)['"]\)/g // Регулярное выражение для поиска t('key')
 
     let match: RegExpExecArray | null
-    while ((match = regex.exec(code)) !== null) {
+    while (true) {
+        match = regex.exec(code)
+        if (match === null) {
+            break // Выход из цикла, если совпадений больше нет
+        }
+
         const key = match[1]
         // Фильтруем ключи: исключаем пути к файлам и другие лишние строки
         if (

@@ -2,13 +2,6 @@ import fs from 'fs'
 import path from 'path'
 import { parseKeysFromDirectory } from './parseText'
 
-/**
- * Заполняет файлы переводов ключами.
- * @param {Set<string>} keys - Набор ключей для перевода.
- * @param {string[]} locales - Локали, для которых нужно создать переводы.
- * @param {string} mainLocale - Основная локаль, где ключ = значение.
- * @param {string} defaultValue - Значение по умолчанию для других локалей.
- */
 function fillTranslations(
     keys: Set<string>,
     locales: string[],
@@ -17,13 +10,13 @@ function fillTranslations(
 ) {
     const keysArray = Array.from(keys)
 
-    for (const locale of locales) {
+    locales.forEach((locale) => {
         const translations: Record<string, string> = {}
 
-        for (const key of keysArray) {
+        keysArray.forEach((key) => {
             // В основной локали ключ = значению, в остальных — ключ = defaultValue
             translations[key] = locale === mainLocale ? key : defaultValue
-        }
+        })
 
         // Создаём директорию, если её нет
         const dirPath = path.join(
@@ -41,7 +34,7 @@ function fillTranslations(
         fs.writeFileSync(filePath, JSON.stringify(translations, null, 2))
 
         console.log(`Файл переводов для локали "${locale}" создан: ${filePath}`)
-    }
+    })
 }
 
 // Пример использования

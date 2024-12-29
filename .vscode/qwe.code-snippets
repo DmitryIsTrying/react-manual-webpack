@@ -1,0 +1,26 @@
+{
+	"React Component with SCSS Module": {
+		"prefix": "qwe",
+		"scope": "typescriptreact",
+		"body": [
+			"import { classNames } from 'shared/lib/classNames/classNames';",
+			"import cls from './${TM_FILENAME_BASE}.module.scss';",
+			"",
+			"interface ${TM_FILENAME_BASE}Props {",
+			"    className?: string;",
+			"}",
+			"",
+			"export const ${TM_FILENAME_BASE} = ({ className }: ${TM_FILENAME_BASE}Props) => {",
+			"    return (",
+			"        <div className={classNames(cls.${TM_FILENAME_BASE}, {}, [className])}>",
+			"        </div>",
+			"    );",
+			"};",
+			"",
+			"${TM_FILENAME_BASE}.defaultProps = {",
+			"    className: '',",
+			"};"
+		],
+		"description": "Create a React component with SCSS module"
+	}
+}
